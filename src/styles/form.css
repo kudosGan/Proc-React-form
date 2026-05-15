@@ -1,0 +1,703 @@
+/* PAGE BACKGROUND */
+
+.app-background {
+  background-color: #d9d9d9;
+  min-height: 100vh;
+  padding: 30px 0;
+}
+
+
+/* MAIN PAGE */
+
+.page-container {
+  width: 999px;
+  margin: auto;
+  background: white;
+  padding: 28px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+}
+
+
+/* HEADER */
+
+.government-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.gov-left {
+  display: flex;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+  height: auto;
+}
+
+
+/* TITLE */
+
+.form-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+
+/* DESCRIPTION */
+
+.form-description {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+/* SECTION */
+
+.form-section {
+  margin-top: 30px;
+  border: 1px solid #8f8f8f;
+}
+
+.section-header {
+  background-color: #d9d9d9;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #8f8f8f;
+}
+
+
+
+
+/* GRID */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+
+/* INPUTS */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-input {
+  background-color: #dfeaf4;
+  border: 1px solid #8f8f8f;
+  padding: 10px;
+  font-size: 14px;
+  min-height: 30px;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+/* TABLE FORM LAYOUT */
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.form-table td {
+  border: 1px solid #777;
+  padding: 0;
+  vertical-align: top;
+}
+
+
+/* SUB SECTION */
+
+.subsection-title {
+  background-color: #d9d9d9;
+  font-weight: bold;
+  padding: 6px 8px;
+  font-size: 13px;
+  border-top: none;
+}
+
+
+/* TABLE FIELD */
+
+.table-field {
+  display: center;
+  flex-direction: false;
+
+}
+
+.table-label {
+  font-size: 14px;
+  padding: 6px;
+  background: none;
+}
+
+.table-input {
+  background-color: #dfe5f6;
+  border: none;
+  min-height: 38px;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.table-input:focus {
+  outline: none;
+}
+
+/* CHECKBOX */
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 13px;
+  min-height: 40px;
+}
+
+
+/* YES NO */
+
+.yes-no-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  min-height: 40px;
+  font-size: 13px;
+}
+
+/* TEXTAREA WRAPPER */
+
+.textarea-wrapper {
+  width: 100%;
+}
+
+/* TEXT AREA */
+
+.textarea-field {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 80px;
+  background-color: #dfe5f6;
+  border: none;
+  resize: vertical;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  display: block;
+}
+
+/* LARGE TEXT AREA */
+
+.large-textarea {
+  min-height: 140px;
+}
+/* STRATEGY OPTIONS */
+
+.strategy-options {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 10px 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  min-height: 40px;
+}
+
+.strategy-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* IMPROVED ROW SPACING */
+
+.table-description {
+  padding: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="date"] {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.large-textarea {
+  min-height: 80px;
+}
+.full-width-textarea {
+  width: 100%;
+}
+
+.full-width-textarea textarea {
+  width: 100%;
+  display: block;
+}
+
+/* NAVIGATION */
+
+.navigation-buttons {
+  width: 1100px;
+  margin: 20px auto 40px auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.navigation-buttons button {
+  background-color: #2b579a;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.navigation-buttons button:hover {
+  background-color: #1d3f73;
+}
+
+/* FOOTER */
+
+.form-footer {
+  width: 999px;
+  margin: 0 auto 40px auto;
+  background: white;
+  border: 1px solid #999;
+  border-top: none;
+
+  padding: 14px 24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* LEFT */
+
+.footer-left {
+  font-size: 12px;
+  color: #444;
+  width: 160px;
+}
+
+
+/* CENTER */
+
+.footer-center {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex: 1;
+}
+
+
+/* RIGHT */
+
+.footer-right {
+  width: 160px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/* CANADA LOGO */
+
+.footer-canada-logo {
+  height: 50px;
+  width: auto;
+}
+
+
+/* BUTTONS */
+
+.footer-center button {
+  background-color: #2b579a;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.footer-center button:hover {
+  background-color: #1d3f73;
+}
+
+/* Aligns the question and Yes/No buttons on the same line */
+.inline-question {
+  display: flex;
+  justify-content: flex-end; /* Pushes the radio buttons to the right */
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.inline-question span {
+  flex: 1; /* Takes up remaining space on the left */
+}
+
+/* Horizontal Radio Buttons */
+.radio-horizontal {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Part 4 Table Styling */
+.procurement-cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.procurement-cost-table th, 
+.procurement-cost-table td {
+  border: 1px solid #000;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.procurement-cost-table th {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.label-cell {
+  text-align: left;
+  padding-left: 5px;
+}
+
+.amount-display {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.bg-blue-light {
+  background-color: #e8f0fe; /* Matches the light blue shading in image 2 */
+}
+
+.province-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.province-select {
+  flex: 1;
+  background-color: #e8f0fe;
+}
+
+/* PART 5 - Typography & Lists */
+.notice-bold {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.auth-group-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+/* Metadata Inline Fields (RCM, Branch, etc.) */
+.meta-info-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+.meta-info-grid td {
+  padding: 6px 10px 6px 0;
+  border: none !important;
+}
+.meta-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.meta-inline span {
+  white-space: nowrap;
+}
+.border-bottom-only {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #777;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+
+/* Custom Table Layouts for Part 5 */
+.signature-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+}
+.signature-grid-table td {
+  border: 1px solid #000;
+  padding: 4px;
+  vertical-align: top;
+  height: 48px; /* Match standard physical field height */
+}
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 2px;
+}
+.format-hint {
+  font-size: 8px;
+  color: #666;
+}
+.table-input-plain {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  background: transparent;
+}
+
+/* Financial Table Row Adjustments */
+.financial-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.financial-data-table th, .financial-data-table td {
+  border: 1px solid #000;
+  padding: 4px;
+  font-size: 11px;
+}
+.financial-data-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: center;
+}
+.action-cells {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  border: none !important;
+  align-items: center;
+  height: 100%;
+}
+.small-action-btn {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1px 4px;
+  font-size: 11px;
+}
+
+/* Section 32 certification text block */
+.certification-notice {
+  font-size: 11px;
+  margin-top: 15px;
+  line-height: 1.4;
+  border-top: 1px dashed #777;
+  padding-top: 8px;
+}
+
+/* Part 6 Grid checkbox styling */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  font-size: 12px;
+}
+.checkbox-grid label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Part 7 Transparent Textarea */
+.styled-textarea-transparent {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  resize: vertical;
+}
+
+/* Blue highlighting helpers */
+.bg-blue-light {
+  background-color: #e8f0fe !important;
+}
+
+/* Click to Sign Button layout styling */
+.sign-btn-trigger {
+  width: 90%;
+  position: absolute;
+  bottom: 4px;
+  left: 5%;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.15s ease;
+}
+.sign-btn-trigger:hover {
+  background-color: #1d4ed8;
+}
+
+/* Locked Professional Digital Signature Badge */
+.digital-sig-badge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: #dbeafe;
+  border: 1px solid #3b82f6;
+  border-radius: 4px;
+  padding: 3px 6px;
+  margin-top: 2px;
+}
+.sig-icon {
+  font-size: 11px;
+  margin-right: 4px;
+}
+.sig-name {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 12px;
+  color: #1e3a8a;
+}
+.sig-date {
+  font-size: 8.5px;
+  color: #555;
+  margin-top: 1px;
+}
+
+/* Consent Modal CSS Overlay & Window Box styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 6px;
+  width: 480px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.modal-header {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+.modal-consent-box {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+.consent-text {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #475569;
+}
+.modal-input-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.modal-input-row div {
+  flex: 1;
+}
+.modal-input-row label {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.modal-input-row input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  font-size: 13px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.btn-secondary {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.btn-primary {
+  padding: 6px 14px;
+  border: none;
+  background-color: #2563eb;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+}
+.btn-primary:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
