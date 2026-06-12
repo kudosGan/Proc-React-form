@@ -1,0 +1,140 @@
+.amend-login-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+
+.amend-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.amend-back-btn:hover {
+  color: #111;
+}
+
+.amend-login-icon {
+  width: 52px;
+  height: 52px;
+  background: #e8f0fe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.amend-login-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 6px 0;
+  font-family: Arial, sans-serif;
+}
+
+.amend-login-desc {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 22px 0;
+  font-family: Arial, sans-serif;
+}
+
+.amend-field {
+  margin-bottom: 16px;
+}
+
+.amend-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  font-family: Arial, sans-serif;
+}
+
+.amend-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: #111;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.amend-input:focus {
+  outline: none;
+  border-color: #185FA5;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.1);
+}
+
+.amend-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff3f3;
+  border: 1px solid #ffbdbd;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #c00;
+  margin-bottom: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.amend-search-btn {
+  width: 100%;
+  background: #185FA5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: Arial, sans-serif;
+  transition: background 0.15s;
+}
+
+.amend-search-btn:hover:not(:disabled) {
+  background: #0c447c;
+}
+
+.amend-search-btn:disabled {
+  background: #9cb8d9;
+  cursor: not-allowed;
+}
+
+.amend-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

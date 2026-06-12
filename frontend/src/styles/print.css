@@ -1,0 +1,429 @@
+/* ═══════════════════════════════════════════════════════════
+   PRINT STYLES — A4, tight layout matching original A9565-E
+═══════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  margin: 0;
+  padding: 0;
+}
+
+body.print-body {
+  margin: 0;
+  padding: 0;
+  background: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  color: #000;
+}
+
+/* ─────────────────────────────────────────
+   PAGE WRAPPER — A4 width, tight
+───────────────────────────────────────── */
+.print-page {
+  width: 794px;
+  margin: 0 auto;
+  background: white;
+  padding: 12px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-after: page;
+  page-break-inside: avoid;
+}
+
+.print-page:last-of-type {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+}
+
+/* Force Puppeteer to see each page separately */
+@media screen {
+  .print-page {
+    border-bottom: 3px solid #ccc;
+    margin-bottom: 20px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   GOVERNMENT HEADER — matches original
+───────────────────────────────────────── */
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.print-header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.print-header-logo {
+  height: 38px;
+  width: auto;
+}
+
+.print-header-dept {
+  font-size: 9.5px;
+  line-height: 1.35;
+  color: #000;
+}
+
+.print-header-right {
+  font-size: 9.5px;
+  line-height: 1.35;
+  text-align: right;
+  color: #000;
+}
+
+/* ─────────────────────────────────────────
+   FORM TITLE
+───────────────────────────────────────── */
+.print-form-title {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0 4px 0;
+}
+
+.print-form-description {
+  font-size: 9px;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+/* ─────────────────────────────────────────
+   SECTIONS — tight borders
+───────────────────────────────────────── */
+.print-section {
+  border: 1px solid #777;
+  margin-bottom: 4px;
+}
+
+.print-section-header {
+  background-color: #d9d9d9;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-bottom: 1px solid #777;
+}
+
+.print-subsection-header {
+  background-color: #d9d9d9;
+  font-weight: bold;
+  font-size: 9.5px;
+  padding: 2px 6px;
+  border-bottom: 1px solid #aaa;
+}
+
+/* ─────────────────────────────────────────
+   TABLES
+───────────────────────────────────────── */
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.print-table td {
+  border: 1px solid #777;
+  padding: 2px 4px;
+  vertical-align: top;
+  font-size: 9.5px;
+}
+
+.print-field-label {
+  font-size: 8.5px;
+  color: #333;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.print-field-value {
+  font-size: 10px;
+  color: #000;
+  min-height: 14px;
+  display: block;
+  word-break: break-word;
+}
+
+.print-blue {
+  background-color: #dfe5f6 !important;
+}
+
+.print-blue-light {
+  background-color: #e8f0fe !important;
+}
+
+/* ─────────────────────────────────────────
+   CHECKBOXES
+───────────────────────────────────────── */
+.print-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 5px;
+  font-size: 9.5px;
+}
+
+.print-checkbox {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: white;
+}
+
+.print-checkbox.checked::after {
+  content: '✓';
+  font-size: 8px;
+  font-weight: bold;
+  color: #000;
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────────
+   YES / NO
+───────────────────────────────────────── */
+.print-yesno {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9.5px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.print-radio {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: white;
+}
+
+.print-radio.selected::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #000;
+  border-radius: 50%;
+  display: block;
+}
+
+.print-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ─────────────────────────────────────────
+   SIGNATURE FIELDS — small red arrow tag
+───────────────────────────────────────── */
+.print-signature-cell {
+  background-color: #dfe5f6 !important;
+  vertical-align: top;
+  padding: 2px 3px !important;
+}
+
+.print-sig-signed {
+  display: flex;
+  flex-direction: column;
+  padding: 1px 3px;
+}
+
+.print-sig-name {
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: #1a3a6b;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 1px;
+  margin-bottom: 1px;
+}
+
+.print-sig-meta {
+  font-size: 7px;
+  color: #555;
+  line-height: 1.2;
+}
+
+/* Small red arrow tag — matches original exactly */
+.print-sig-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #c00;
+  color: white;
+  font-size: 7.5px;
+  font-weight: bold;
+  padding: 1px 6px 1px 4px;
+  margin-top: 4px;
+  clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
+  height: 14px;
+  letter-spacing: 0.2px;
+}
+
+/* ─────────────────────────────────────────
+   COST TABLE
+───────────────────────────────────────── */
+.print-cost-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.print-cost-table th {
+  background-color: #f2f2f2;
+  border: 1px solid #777;
+  padding: 2px 3px;
+  font-size: 8.5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.print-cost-table td {
+  border: 1px solid #777;
+  padding: 2px 3px;
+  font-size: 9.5px;
+}
+
+.print-cost-table .total-row td {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+/* ─────────────────────────────────────────
+   FINANCIAL TABLE
+───────────────────────────────────────── */
+.print-financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 3px;
+}
+
+.print-financial-table th {
+  background-color: #f2f2f2;
+  border: 1px solid #777;
+  padding: 2px 2px;
+  font-weight: bold;
+  font-size: 8px;
+  text-align: center;
+}
+
+.print-financial-table td {
+  border: 1px solid #777;
+  padding: 2px 2px;
+  font-size: 8.5px;
+}
+
+/* ─────────────────────────────────────────
+   SUPPORTING DOCS
+───────────────────────────────────────── */
+.print-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px 6px;
+  padding: 5px 6px;
+  font-size: 9px;
+}
+
+.print-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ─────────────────────────────────────────
+   PAGE FOOTER
+───────────────────────────────────────── */
+.print-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+.print-footer-ref {
+  font-size: 8.5px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.print-footer-canada {
+  height: 22px;
+  width: auto;
+}
+
+/* ─────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────── */
+.print-inline-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  font-size: 9.5px;
+  gap: 8px;
+}
+
+.print-textarea-value {
+  font-size: 9.5px;
+  min-height: 30px;
+  padding: 3px 5px;
+  background-color: #dfe5f6;
+  width: 100%;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.print-notice {
+  font-size: 9px;
+  line-height: 1.35;
+  padding: 3px 6px;
+  border-bottom: 1px solid #777;
+}
+
+.print-notice strong {
+  font-weight: bold;
+}
+
+.print-section-label {
+  font-weight: bold;
+  font-size: 9.5px;
+  padding: 2px 6px 1px 6px;
+}
+
+.print-radio-options {
+  display: flex;
+  gap: 16px;
+  padding: 2px 6px 4px 6px;
+  font-size: 9.5px;
+}
+
+.print-certification {
+  font-size: 9px;
+  line-height: 1.35;
+  padding: 4px 6px;
+  border-top: 1px dashed #777;
+  margin-top: 3px;
+}
+
+@media print {
+  body { margin: 0; padding: 0; }
+  .print-page { page-break-after: always; }
+  .print-page:last-child { page-break-after: avoid; }
+}
