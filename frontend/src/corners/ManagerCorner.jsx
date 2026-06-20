@@ -3,9 +3,10 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import '../styles/start.css'
 import '../styles/buyer.css'
-import MgrDashboard    from './MgrDashboard.jsx'
+import MgrDashboard     from './MgrDashboard.jsx'
 import MgrAssignApprove from './MgrAssignApprove.jsx'
-import MgrPowerBi      from './MgrPowerBi.jsx'
+import MgrPowerBi       from './MgrPowerBi.jsx'
+import MurphyDog        from '../components/MurphyDog.jsx'
 
 const ZONE_BADGE = {
   Central : { bg:'#f3eeff', color:'#6B3FA0', border:'#e0d4f7' },
@@ -132,6 +133,9 @@ function ManagerCorner({ onBack, manager }) {
       </div>
 
       <Footer />
+
+      {/* Murphy the animated dog mascot — fixed bottom-right, self-toggling */}
+      <MurphyDog />
     </div>
   )
 }
