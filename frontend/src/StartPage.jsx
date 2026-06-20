@@ -1,22 +1,14 @@
-import canadaLogo from './assests/canada-logo1.png'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import './styles/start.css'
 
-function StartPage({ onNewRequest, onAmendRequest }) {
+function StartPage({ onBusinessOwner, onBuyer, onManager }) {
   return (
     <div className="start-wrapper">
 
-      <div className="start-header">
-        <div className="start-header-left">
-          <img src={canadaLogo} alt="Government of Canada" className="start-logo" />
-          <div className="start-dept">
-            Agriculture and<br />Agri-Food Canada
-          </div>
-        </div>
-        <div className="start-dept" style={{ textAlign: 'right' }}>
-          Agriculture et<br />Agroalimentaire Canada
-        </div>
-      </div>
+      <Header />
 
+      {/* BODY */}
       <div className="start-body">
 
         <div className="start-icon-wrap">
@@ -35,51 +27,70 @@ function StartPage({ onNewRequest, onAmendRequest }) {
           Form A9565-E
         </p>
 
-        <div className="start-buttons">
+        {/* 3 CORNER CARDS */}
+        <div className="corner-grid">
 
-          <button className="start-card" onClick={onNewRequest}>
-            <div className="start-card-icon start-card-icon--green">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
+          {/* BUSINESS OWNER */}
+          <button className="corner-card corner-card--green" onClick={onBusinessOwner}>
+            <div className="corner-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
               </svg>
             </div>
-            <div className="start-card-text">
-              <span className="start-card-title">New Request</span>
-              <span className="start-card-desc">Submit a new Procurement Request Form A9565-E</span>
+            <div className="corner-card-title">Business Owner</div>
+            <div className="corner-card-desc">Submit and manage procurement requests</div>
+            <div className="corner-card-tags">
+              <span className="corner-tag">New Request</span>
+              <span className="corner-tag">Change Request</span>
+              <span className="corner-tag">Amendment</span>
             </div>
-            <svg className="start-card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
           </button>
 
-          <button className="start-card" onClick={onAmendRequest}>
-            <div className="start-card-icon start-card-icon--blue">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#185FA5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          {/* BUYER */}
+          <button className="corner-card corner-card--blue" onClick={onBuyer}>
+            <div className="corner-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#185FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
             </div>
-            <div className="start-card-text">
-              <span className="start-card-title">Amend Request</span>
-              <span className="start-card-desc">Update an existing request using your Request ID</span>
+            <div className="corner-card-title">Buyer Corner</div>
+            <div className="corner-card-desc">View and manage assigned procurement requests</div>
+            <div className="corner-card-tags">
+              <span className="corner-tag">My Requests</span>
+              <span className="corner-tag">Update Status</span>
+              <span className="corner-tag">Search</span>
             </div>
-            <svg className="start-card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
+          </button>
+
+          {/* MANAGER */}
+          <button className="corner-card corner-card--purple" onClick={onManager}>
+            <div className="corner-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <div className="corner-card-title">Manager Corner</div>
+            <div className="corner-card-desc">Dashboard, assignments and approvals</div>
+            <div className="corner-card-tags">
+              <span className="corner-tag">Dashboard</span>
+              <span className="corner-tag">Assign</span>
+              <span className="corner-tag">Approve</span>
+            </div>
           </button>
 
         </div>
 
       </div>
 
-      <div className="start-footer">
-        <span>AAFC Procurement System</span>
-        <span style={{ fontWeight: 500 }}>Canada</span>
-      </div>
+      {/* FOOTER */}
 
+   <Footer />
     </div>
   )
 }

@@ -6,9 +6,11 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-import submitRouter from './routes/submit.js'
-import agentRouter from './routes/agent.js'
-import amendRouter from './routes/amend.js'
+import submitRouter  from './routes/submit.js'
+import agentRouter   from './routes/agent.js'
+import amendRouter   from './routes/amend.js'
+import buyerRouter   from './routes/buyer.js'
+import managerRouter from './routes/manager.js'
 
 dotenv.config()
 
@@ -33,7 +35,8 @@ if (process.env.NODE_ENV !== 'production') {
 app.use('/api/submit', submitRouter)
 app.use('/api/agent', agentRouter)
 app.use('/api/amend', amendRouter)
-
+app.use('/api/buyer',   buyerRouter)
+app.use('/api/manager', managerRouter)
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',

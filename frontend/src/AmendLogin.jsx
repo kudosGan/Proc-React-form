@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import canadaLogo from './assests/canada-logo1.png'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import './styles/start.css'
 import './styles/amend.css'
 
 function AmendLogin({ onBack, onFound }) {
-  const [requestId, setRequestId]   = useState('')
-  const [email, setEmail]           = useState('')
-  const [loading, setLoading]       = useState(false)
-  const [error, setError]           = useState('')
+  const [requestId, setRequestId] = useState('')
+  const [email, setEmail]         = useState('')
+  const [loading, setLoading]     = useState(false)
+  const [error, setError]         = useState('')
 
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
 
@@ -42,7 +43,6 @@ function AmendLogin({ onBack, onFound }) {
         return
       }
 
-      // Pass found record to parent — moves to amendment form
       onFound(result)
 
     } catch (err) {
@@ -59,18 +59,7 @@ function AmendLogin({ onBack, onFound }) {
   return (
     <div className="start-wrapper">
 
-      {/* HEADER */}
-      <div className="start-header">
-        <div className="start-header-left">
-          <img src={canadaLogo} alt="Government of Canada" className="start-logo" />
-          <div className="start-dept">
-            Agriculture and<br />Agri-Food Canada
-          </div>
-        </div>
-        <div className="start-dept" style={{ textAlign: 'right' }}>
-          Agriculture et<br />Agroalimentaire Canada
-        </div>
-      </div>
+      <Header />
 
       {/* BODY */}
       <div className="start-body">
@@ -165,11 +154,7 @@ function AmendLogin({ onBack, onFound }) {
       </div>
 
       {/* FOOTER */}
-      <div className="start-footer">
-        <span>AAFC Procurement System</span>
-        <span style={{ fontWeight: 500 }}>Canada</span>
-      </div>
-
+            <Footer />
     </div>
   )
 }

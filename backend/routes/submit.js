@@ -142,6 +142,13 @@ const buildPAPayload = (formData, pdfBase64, fiscalYear) => ({
   confirmedBy            : formData.confirmedName           || '',
   rcManager              : formData.responsibilityCentreManager || '',
   rcBranch               : formData.responsibilityBranch    || '',
+
+  // Plant Code / Zone routing — maps to SPO "Zone" column
+  zone                   : formData.plantZone   || '',
+  plantCode              : formData.plantCode   || '',
+  plantCity              : formData.plantCity   || '',
+  plantName              : formData.plantName   || '',
+
   submittedAt            : new Date().toISOString(),
   status                 : 'Pending Signature',
 
@@ -170,6 +177,7 @@ router.post('/', async (req, res) => {
     console.log(`[submit] New submission at ${new Date().toISOString()}`)
     console.log(`[submit] Fiscal year: ${fiscalYear}`)
     console.log(`[submit] Client: ${formData.clientFirstName || '?'} ${formData.clientLastName || '?'} — ${formData.clientBranch || '?'}`)
+    console.log(`[submit] Plant Code: ${formData.plantCode || '(none)'} → Zone: ${formData.plantZone || '(not set)'}`)
     console.log(`[submit] Uploaded files: ${(formData.uploadedFiles || []).length}`)
 
     // STEP 1: Generate PDF

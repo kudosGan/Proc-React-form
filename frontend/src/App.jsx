@@ -22,6 +22,9 @@ function App() {
   // ─────────────────────────────────────────
   const [formData, setFormData] = useState({
 
+    // Plant Code / Zone routing
+    plantCode: '', plantZone: '', plantCity: '', plantName: '',
+
     // Page 1 — Client
     clientFirstName: '', clientLastName: '', clientEmail: '', clientBranch: '',
     businessOwnerFirstName: '', businessOwnerLastName: '', businessOwnerEmail: '', businessOwnerBranch: '',
