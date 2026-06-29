@@ -6,10 +6,12 @@ import PrintPage from './PrintPage.jsx'
 import StartPage from './StartPage.jsx'
 import AmendLogin from './AmendLogin.jsx'
 import AmendForm from './AmendForm.jsx'
-import BOCorner      from './corners/BOCorner.jsx'
-import BuyerCorner   from './corners/BuyerCorner.jsx'
-import ManagerCorner from './corners/ManagerCorner.jsx'
-import ManagerLogin  from './corners/ManagerLogin.jsx'
+import BOCorner          from './corners/BOCorner.jsx'
+import BuyerCorner       from './corners/BuyerCorner.jsx'
+import ManagerCorner     from './corners/ManagerCorner.jsx'
+import ManagerLogin      from './corners/ManagerLogin.jsx'
+import DirectorLogin     from './corners/DirectorLogin.jsx'
+import DirectorDashboard from './corners/DirectorDashboard.jsx'
 
 const isPrintMode = window.location.pathname === '/print'
 
@@ -18,7 +20,8 @@ function Root() {
   const [amendRecord, setAmendRecord]       = useState(null)
   const [amendRequestId, setAmendRequestId] = useState('')
   const [amendSpoItemId, setAmendSpoItemId] = useState(null)
-  const [managerUser, setManagerUser]       = useState(null)
+  const [managerUser,  setManagerUser]  = useState(null)
+  const [directorUser, setDirectorUser] = useState(null)
 
   if (isPrintMode) return <PrintPage />
 
@@ -27,6 +30,7 @@ function Root() {
       onBusinessOwner={() => setView('bo-corner')}
       onBuyer={() => setView('buyer-corner')}
       onManager={() => setView('manager-corner')}
+      onDirector={() => setView('director-corner')}
     />
   )
 
@@ -67,6 +71,21 @@ function Root() {
   if (view === 'buyer-corner') return (
     <BuyerCorner onBack={() => setView('start')} />
   )
+
+  if (view === 'director-corner') {
+    if (!directorUser) return (
+      <DirectorLogin
+        onBack={() => setView('start')}
+        onLogin={(dir) => setDirectorUser(dir)}
+      />
+    )
+    return (
+      <DirectorDashboard
+        director={directorUser}
+        onSignOut={() => { setDirectorUser(null); setView('start') }}
+      />
+    )
+  }
 
   if (view === 'manager-corner') {
     if (!managerUser) return (

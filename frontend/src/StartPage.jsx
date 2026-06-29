@@ -2,14 +2,46 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import './styles/start.css'
 
-function StartPage({ onBusinessOwner, onBuyer, onManager }) {
+function StartPage({ onBusinessOwner, onBuyer, onManager, onDirector }) {
   return (
     <div className="start-wrapper">
 
       <Header />
 
       {/* BODY */}
-      <div className="start-body">
+      <div className="start-body" style={{ position: 'relative' }}>
+
+        {/* Director button — greyed, top-right corner of body area */}
+        <button
+          onClick={onDirector}
+          title="Director Portal"
+          style={{
+            position      : 'absolute',
+            top           : 16,
+            right         : 20,
+            width         : 24,
+            height        : 24,
+            borderRadius  : '50%',
+            background    : '#e8e8e8',
+            border        : '1px solid #d0d0d0',
+            color         : '#bbb',
+            fontWeight    : 400,
+            fontSize      : 11,
+            cursor        : 'pointer',
+            fontFamily    : 'Arial',
+            lineHeight    : '1',
+            zIndex        : 10,
+            display       : 'flex',
+            alignItems    : 'center',
+            justifyContent: 'center',
+            transition    : 'opacity .2s',
+            opacity       : 0.45,
+          }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '0.45'}
+        >
+          D
+        </button>
 
         <div className="start-icon-wrap">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -44,6 +76,7 @@ function StartPage({ onBusinessOwner, onBuyer, onManager }) {
               <span className="corner-tag">New Request</span>
               <span className="corner-tag">Change Request</span>
               <span className="corner-tag">Amendment</span>
+              <span className="corner-tag">Request Status</span>
             </div>
           </button>
 
