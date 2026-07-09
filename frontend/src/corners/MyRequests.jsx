@@ -45,7 +45,7 @@ function MyRequests({
   const [error, setError]         = useState('')
   const [items, setItems]         = useState(initialItems)
   const [filterText, setFilterText] = useState('')
-  const [filterMode, setFilterMode] = useState('refId') // 'refId' | 'sop'
+  const [filterMode, setFilterMode] = useState('refId') // 'refId' | 'SAP'
 
   const updateEmail = (val) => {
     setEmail(val)
@@ -91,7 +91,7 @@ function MyRequests({
     if (!filterText.trim()) return true
     const q = filterText.trim().toLowerCase()
     if (filterMode === 'refId') return (item.Title || '').toLowerCase().includes(q)
-    if (filterMode === 'sop')   return (item.Solicitation_x0020_Number || '').toLowerCase().includes(q)
+    if (filterMode === 'sap')   return (item.Solicitation_x0020_Number || '').toLowerCase().includes(q)
     return true
   })
 
@@ -193,7 +193,7 @@ function MyRequests({
                     Reference ID
                   </button>
                   <button
-                    onClick={() => { setFilterMode('sop'); setFilterText('') }}
+                    onClick={() => { setFilterMode('sap'); setFilterText('') }}
                     style={{
                       padding     : '5px 12px',
                       fontSize    : 11,
@@ -201,20 +201,20 @@ function MyRequests({
                       border      : 'none',
                       borderRight : '1px solid #dde3f0',
                       cursor      : 'pointer',
-                      background  : filterMode === 'sop' ? '#185FA5' : '#f5f7ff',
-                      color       : filterMode === 'sop' ? '#fff' : '#555',
+                      background  : filterMode === 'sap' ? '#185FA5' : '#f5f7ff',
+                      color       : filterMode === 'sap' ? '#fff' : '#555',
                       fontFamily  : 'Arial',
                       whiteSpace  : 'nowrap',
                     }}
                   >
-                    SOP Number
+                    SAP Number
                   </button>
                   {/* filter input */}
                   <input
                     type="text"
                     value={filterText}
                     onChange={(e) => setFilterText(e.target.value)}
-                    placeholder={filterMode === 'refId' ? 'e.g. ESC-2627-005' : 'e.g. ESC-SOL-001'}
+                    placeholder={filterMode === 'refId' ? 'e.g. ESC-2627-XX' : 'e.g. ESC-SAP-XXX'}
                     style={{
                       border      : 'none',
                       outline     : 'none',
@@ -261,7 +261,7 @@ function MyRequests({
                     <tr>
                       <th>Request ID</th>
                       <th>Client Name</th>
-                      <th>SOP Number</th>
+                      <th>SAP Number</th>
                       <th>Status</th>
                       <th>Priority</th>
                       <th>Assigned Date</th>
