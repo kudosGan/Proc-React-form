@@ -725,6 +725,8 @@ const Page4Print = ({ f }) => (
             <td style={{ width: '40%' }}>
               <span className="print-field-label">Date (YYYY-MM-DD)</span>
               <div className="print-field-value print-blue" style={{ padding: '2px 4px', minHeight: 18 }}>{f.section32Date || '\u00A0'}</div>
+              {/* DocuSign anchor tab target \u2014 invisible, real text for anchorString matching */}
+              <span style={{ fontSize: 1, color: '#fff' }}>section32signhere</span>
             </td>
           </tr>
         </tbody>

@@ -1,3 +1,9 @@
+const SIGNATURE_METHODS = [
+  { value: 'docusign', label: 'DocuSign (e-signature)' },
+  { value: 'mykey',    label: 'MyKey / Entrust (manual)' },
+  { value: 'email',    label: 'Email PDF only' },
+]
+
 function FormFooter({
   currentPage,
   totalPages,
@@ -5,7 +11,9 @@ function FormFooter({
   onBack,
   onSubmit,
   submitDisabled,
-  submitLabel
+  submitLabel,
+  signatureMethod,
+  onSignatureMethodChange,
 }) {
 
   return (
@@ -17,6 +25,24 @@ function FormFooter({
       </div>
 
       <div className="footer-center">
+
+        {currentPage === totalPages && (
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginRight: 16, fontSize: 12 }}>
+            <span style={{ fontWeight: 600 }}>Signature method:</span>
+            {SIGNATURE_METHODS.map(({ value, label }) => (
+              <label key={value} style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
+                <input
+                  type="radio"
+                  name="signatureMethod"
+                  value={value}
+                  checked={signatureMethod === value}
+                  onChange={() => onSignatureMethodChange?.(value)}
+                />
+                {label}
+              </label>
+            ))}
+          </div>
+        )}
 
         {currentPage > 1 && (
           <button onClick={onBack}>
@@ -35,8 +61,8 @@ function FormFooter({
             onClick={onSubmit}
             disabled={submitDisabled}
             style={{
-              opacity: submitDisabled ? 0.5 : 1,
-              cursor : submitDisabled ? 'not-allowed' : 'pointer',
+              backgroundColor: submitDisabled ? '#9e9e9e' : '#2b579a',
+              cursor         : submitDisabled ? 'not-allowed' : 'pointer',
             }}
           >
             {submitLabel || 'Submit'}

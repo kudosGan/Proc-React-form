@@ -12,6 +12,7 @@
 
 import express   from 'express'
 import puppeteer from 'puppeteer'
+import { sendForSignature, isDocuSignConfigured } from '../services/docusign.js'
 
 const router = express.Router()
 
@@ -102,6 +103,35 @@ const generatePdf = async (formData, fiscalYear) => {
 // ─────────────────────────────────────────────────────────────
 // POWER AUTOMATE PAYLOAD
 // ─────────────────────────────────────────────────────────────
+// Signature method controls what the PA-side "send email" action should
+// say (or whether it should run at all — DocuSign emails the signer itself).
+const buildEmailContent = (formData, fiscalYear) => {
+  const clientName = `${formData.clientFirstName || ''} ${formData.clientLastName || ''}`.trim()
+  const type = [formData.goodsSelected && 'Goods', formData.servicesSelected && 'Services', formData.constructionSelected && 'Construction'].filter(Boolean).join(', ') || 'TBD'
+
+  if (formData.signatureMethod === 'email') {
+    return {
+      emailSubject: `Procurement Request ESC-${fiscalYear} — ${clientName}`,
+      emailBody   : `Dear ${clientName},\n\nPlease find attached your completed Procurement Request Form A9565-E.\n\nProcurement Details:\n• Client: ${clientName} — ${formData.clientBranch || ''}\n• Business Owner: ${formData.businessOwnerFirstName || ''} ${formData.businessOwnerLastName || ''}\n• Type: ${type}\n\nThis request has been logged in SharePoint with reference ESC-${fiscalYear}-[assigned on creation].\n\nThank you,\nAAFC Procurement System`,
+    }
+  }
+
+  if (formData.signatureMethod === 'docusign') {
+    return {
+      // PA should skip its own "send email" action for this method —
+      // DocuSign already emailed the Section 32 Manager directly.
+      emailSubject: `Procurement Request ESC-${fiscalYear} — sent via DocuSign`,
+      emailBody   : `Sent to the Section 32 Manager (${formData.section32ManagerEmail || ''}) via DocuSign for e-signature. No further email action needed from Power Automate.`,
+    }
+  }
+
+  // default: 'mykey'
+  return {
+    emailSubject: `Action Required: MyKey Signature — Procurement Request ESC-${fiscalYear} — ${clientName}`,
+    emailBody   : `Dear ${clientName},\n\nPlease find attached your completed Procurement Request Form A9565-E for your review and signature.\n\nProcurement Details:\n• Client: ${clientName} — ${formData.clientBranch || ''}\n• Business Owner: ${formData.businessOwnerFirstName || ''} ${formData.businessOwnerLastName || ''}\n• Type: ${type}\n\nInstructions:\n1. Open the attached PDF in Adobe Acrobat\n2. Sign all required signature fields using your MyKey / Entrust digital key\n3. Save the signed PDF\n4. Forward the signed PDF to the procurement GD inbox: ${process.env.SIGNATORY_EMAIL || 'procurement-gd@agr.gc.ca'}\n\nThis request will be logged in SharePoint with reference ESC-${fiscalYear}-[assigned on creation].\n\nThank you,\nAAFC Procurement System`,
+  }
+}
+
 const buildPAPayload = (formData, pdfBase64, fiscalYear) => ({
 
   fiscalYear,
@@ -110,9 +140,9 @@ const buildPAPayload = (formData, pdfBase64, fiscalYear) => ({
   pdfBase64,
   fileName     : `ESC-${fiscalYear}-PENDING.pdf`,
 
-  emailTo      : formData.clientEmail || process.env.SIGNATORY_EMAIL || '',
-  emailSubject : `Action Required: MyKey Signature — Procurement Request ESC-${fiscalYear} — ${formData.clientFirstName || ''} ${formData.clientLastName || ''}`,
-  emailBody    : `Dear ${formData.clientFirstName || ''} ${formData.clientLastName || ''},\n\nPlease find attached your completed Procurement Request Form A9565-E for your review and signature.\n\nProcurement Details:\n• Client: ${formData.clientFirstName || ''} ${formData.clientLastName || ''} — ${formData.clientBranch || ''}\n• Business Owner: ${formData.businessOwnerFirstName || ''} ${formData.businessOwnerLastName || ''}\n• Type: ${[formData.goodsSelected && 'Goods', formData.servicesSelected && 'Services', formData.constructionSelected && 'Construction'].filter(Boolean).join(', ') || 'TBD'}\n\nInstructions:\n1. Open the attached PDF in Adobe Acrobat\n2. Sign all required signature fields using your MyKey / Entrust digital key\n3. Save the signed PDF\n4. Forward the signed PDF to the procurement GD inbox: ${process.env.SIGNATORY_EMAIL || 'procurement-gd@agr.gc.ca'}\n\nThis request will be logged in SharePoint with reference ESC-${fiscalYear}-[assigned on creation].\n\nThank you,\nAAFC Procurement System`,
+  signatureMethod : formData.signatureMethod || 'mykey',
+  emailTo         : formData.clientEmail || process.env.SIGNATORY_EMAIL || '',
+  ...buildEmailContent(formData, fiscalYear),
 
   clientName    : `${formData.clientFirstName || ''} ${formData.clientLastName || ''}`.trim(),
   clientEmail   : formData.clientEmail             || '',
@@ -142,6 +172,7 @@ const buildPAPayload = (formData, pdfBase64, fiscalYear) => ({
   confirmedBy            : formData.confirmedName           || '',
   rcManager              : formData.responsibilityCentreManager || '',
   rcBranch               : formData.responsibilityBranch    || '',
+  section32ManagerEmail  : formData.section32ManagerEmail    || '',
 
   // Plant Code / Zone routing — maps to SPO "Zone" column
   zone                   : formData.plantZone   || '',
@@ -184,7 +215,26 @@ router.post('/', async (req, res) => {
     const pdfBuffer = await generatePdf(formData, fiscalYear)
     const pdfBase64 = pdfBuffer.toString('base64')
 
-    // STEP 2: Fire Power Automate
+    // STEP 2: DocuSign — send for e-signature if that's the chosen method
+    const signatureMethod = formData.signatureMethod || 'mykey'
+
+    if (signatureMethod === 'docusign') {
+      if (!isDocuSignConfigured()) {
+        return res.status(400).json({
+          error: 'DocuSign is not configured yet. Add DOCUSIGN_INTEGRATION_KEY, DOCUSIGN_USER_ID, DOCUSIGN_ACCOUNT_ID and DOCUSIGN_PRIVATE_KEY_PATH to backend/.env — see README → "Connecting DocuSign".',
+        })
+      }
+
+      console.log(`[submit] Sending envelope to DocuSign for Section 32 Manager: ${formData.section32ManagerEmail}`)
+      const envelope = await sendForSignature(pdfBuffer, {
+        signerEmail: formData.section32ManagerEmail,
+        signerName : formData.responsibilityCentreManager || 'Section 32 Manager',
+        fiscalYear,
+      })
+      console.log(`[submit] ✅ DocuSign envelope sent — id ${envelope.envelopeId}, status ${envelope.status}`)
+    }
+
+    // STEP 3: Fire Power Automate
     const PA_URL = process.env.POWER_AUTOMATE_URL
 
     if (!PA_URL) {

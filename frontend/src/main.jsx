@@ -44,7 +44,7 @@ function Root() {
   )
 
   if (view === 'new') return (
-    <App onBack={() => setView('bo-corner')} />
+    <App onBack={() => setView('start')} />
   )
 
   if (view === 'amend-login') return (

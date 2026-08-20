@@ -10,9 +10,13 @@ dist-ssr/
 .env.local
 *.local
 backend/.env
+*.pem
 
 # PDFs — large binaries
 *.pdf
+
+# Claude Code — local agent/config, never commit
+.claude/
 
 # OS / Editor
 .DS_Store

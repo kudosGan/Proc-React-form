@@ -10,7 +10,7 @@ import './copilot/copilot.css'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
 
-function App() {
+function App({ onBack }) {
 
   const [currentPage, setCurrentPage]   = useState(1)
   const [submitStatus, setSubmitStatus] = useState(null)  // null | 'loading' | 'success' | 'error'
@@ -51,7 +51,8 @@ function App() {
     // Page 4 — Signatures
     recommendedName: '', recommendedTitle: '', recommendedSignature: '', recommendedDate: '', recommendedSignedAt: '',
     confirmedName: '', confirmedTitle: '', confirmedSignature: '', confirmedDate: '', confirmedSignedAt: '',
-    section32Signature: '', section32Date: '', section32SignedAt: '',
+    section32Signature: '', section32Date: '', section32SignedAt: '', section32ManagerEmail: '',
+    signatureMethod: 'mykey', // 'docusign' | 'mykey' | 'email'
 
     // Page 4 — Responsibility Centre
     responsibilityCentreManager: '', responsibilityTitle: '', responsibilityBranch: '', responsibilityDivision: '',
@@ -138,17 +139,30 @@ function App() {
 
       setSubmissionRef(result.submissionRef || '')
       setSubmitStatus('success')
+
+      const nextSteps = {
+        docusign:
+          `Next steps:\n` +
+          `1. The PDF has been sent to the Section 32 Manager (${formData.section32ManagerEmail}) via DocuSign for e-signature\n` +
+          `2. You'll be notified once they've signed`,
+        email:
+          `Next steps:\n` +
+          `1. The PDF has been emailed — no signature step required`,
+        mykey:
+          `Next steps:\n` +
+          `1. Open the downloaded PDF in Adobe Acrobat\n` +
+          `2. Sign all signature fields with your MyKey / Entrust digital key\n` +
+          `3. Save the signed PDF\n` +
+          `4. Email the signed PDF to kudas.ganesan@agr.gc.ca`,
+      }
+
       setSubmitMessage(
         result.paTriggered
           ? `Submitted successfully!\n\n` +
             `• PDF downloaded to your machine\n` +
             `• SharePoint list item created (ESC-${result.fiscalYear}-NNN)\n` +
             `• Teams notification sent\n\n` +
-            `Next steps:\n` +
-            `1. Open the downloaded PDF in Adobe Acrobat\n` +
-            `2. Sign all signature fields with your MyKey / Entrust digital key\n` +
-            `3. Save the signed PDF\n` +
-            `4. Email the signed PDF to kudas.ganesan@agr.gc.ca` 
+            (nextSteps[formData.signatureMethod] || nextSteps.mykey)
           :`PDF downloaded.\n\nAdd POWER_AUTOMATE_URL to backend/.env to enable SharePoint and Teams.`
       )
 
@@ -174,6 +188,30 @@ function App() {
       {/* FORM */}
       <div className="form-area">
         <div style={{ background: '#d9d9d9', padding: '30px 0', minHeight: '100vh' }}>
+
+          {/* BACK TO HOME */}
+          {onBack && (
+            <div style={{ maxWidth: 999, margin: '0 auto 16px auto' }}>
+              <button onClick={onBack} style={{
+                display     : 'flex',
+                alignItems  : 'center',
+                gap         : 6,
+                background  : 'none',
+                border      : 'none',
+                color       : '#555',
+                fontSize    : 13,
+                cursor      : 'pointer',
+                padding     : 0,
+                fontFamily  : 'Arial',
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back to Home
+              </button>
+            </div>
+          )}
 
           {currentPage === 1 && <Page1 formData={formData} setFormData={setFormData} />}
           {currentPage === 2 && <Page2 formData={formData} setFormData={setFormData} />}
@@ -212,7 +250,13 @@ function App() {
             onNext={nextPage}
             onBack={previousPage}
             onSubmit={handleSubmit}
-            submitDisabled={submitStatus === 'loading' || submitStatus === 'success'}
+            signatureMethod={formData.signatureMethod}
+            onSignatureMethodChange={(v) => setFormData({ ...formData, signatureMethod: v })}
+            submitDisabled={
+              submitStatus === 'loading' ||
+              submitStatus === 'success' ||
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((formData.section32ManagerEmail || '').trim())
+            }
           />
 
         </div>

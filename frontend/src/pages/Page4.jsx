@@ -359,6 +359,23 @@ function Page4({ formData, setFormData }) {
           <div className="certification-notice">
             By signing, you are certifying pursuant to Expenditure Initiation with Availability of Funds, section 32(1) of the Financial Administration Act (FAA).
           </div>
+
+          {/* SECTION 32 MANAGER EMAIL — mandatory */}
+          <div style={{ marginTop: '8px', marginBottom: '4px' }}>
+            <label className="field-label" style={{ display: 'block', marginBottom: '4px' }}>
+              Section 32 Manager Email <span style={{ color: '#c00' }}>*</span>
+            </label>
+            <input
+              type="email"
+              className="table-input"
+              placeholder="manager@agr.gc.ca"
+              value={formData.section32ManagerEmail || ''}
+              onChange={(e) => setFormData({ ...formData, section32ManagerEmail: e.target.value })}
+              style={{ maxWidth: '340px', border: '1px solid #000' }}
+              required
+            />
+          </div>
+
           <table className="signature-grid-table" style={{ marginTop: '5px' }}>
             <tbody>
               <tr>
