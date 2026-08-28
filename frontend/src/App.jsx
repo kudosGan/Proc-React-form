@@ -187,7 +187,30 @@ function App({ onBack }) {
 
       {/* FORM */}
       <div className="form-area">
-        <div style={{ background: '#d9d9d9', padding: '30px 0', minHeight: '100vh' }}>
+        <div style={{ background: '#d9d9d9', padding: '30px 0', minHeight: '100vh', position: 'relative' }}>
+
+          {/* PAGE NUMBER WATERMARK — pinned to the gray margin, stays visible while scrolling */}
+          <div style={{
+            position     : 'fixed',
+            left         : 30,
+            top          : '50%',
+            transform    : 'translateY(-50%) rotate(-90deg)',
+            transformOrigin: 'center',
+            fontFamily   : 'Arial',
+            fontWeight   : 800,
+            fontSize     : currentPage === 4 ? 20 : 26,
+            letterSpacing: 2,
+            color        : 'rgba(0, 0, 0, 0.10)',
+            lineHeight   : 1.3,
+            whiteSpace   : 'nowrap',
+            pointerEvents: 'none',
+            userSelect   : 'none',
+            zIndex       : 0,
+          }}>
+            {currentPage === 4 ? 'FINAL PAGE' : `PAGE ${currentPage}`}
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
 
           {/* BACK TO HOME */}
           {onBack && (
@@ -258,6 +281,8 @@ function App({ onBack }) {
               !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((formData.section32ManagerEmail || '').trim())
             }
           />
+
+          </div>
 
         </div>
       </div>

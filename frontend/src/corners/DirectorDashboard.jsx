@@ -377,6 +377,19 @@ export default function DirectorDashboard({ director, onSignOut }) {
               </svg>
               {loading ? 'Loading…' : 'Refresh'}
             </button>
+            <button
+              onClick={() => {
+                if (window.confirm('You are leaving the Director Dashboard. This will sign you out. Continue?')) {
+                  onSignOut()
+                }
+              }}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 16px', background: '#fff',
+                border: '1px solid #ccc', borderRadius: 7, fontSize: 12, cursor: 'pointer', fontFamily: 'Arial', color: '#555' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7"/><path d="M9 22V12h6v10"/><path d="M21 22H3"/>
+              </svg>
+              Back to Home
+            </button>
             <button onClick={onSignOut}
               style={{ padding: '7px 16px', background: '#fff', border: '1px solid #ccc',
                 borderRadius: 7, fontSize: 12, cursor: 'pointer', fontFamily: 'Arial', color: '#555' }}>
